@@ -25,6 +25,7 @@ def bfs(sr, sc):
         size = len(q)
         for _ in range(size):
             r, c = q.pop(0)  # 현재 방문하는 위치 r,c
+            '''
             for i in range(n):
                 for j in range(n):
                     if (i, j) == (r, c):
@@ -33,6 +34,7 @@ def bfs(sr, sc):
                         print(visited[i][j], end=" ")
                 print()
             print("=================")
+            '''
             # 현재 방문하는 위치가 도착점인 경우 반복 중단
             if maze[r][c] == 99:
                 print(f"탈출 : {distance}")
