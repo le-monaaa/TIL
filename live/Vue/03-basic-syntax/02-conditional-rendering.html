@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- if else -->
+    <p v-if="isSeen">true일때 보여요</p>
+    <!-- false로 평가 받았을 때 반대값은 랜더링조차 되지 않았음을 확인 -->
+    <p v-else>false일때 보여요</p>
+    <button @click="isSeen = !isSeen">토글</button>
+
+    <!-- else if -->
+    <!-- 조건에 맞지 않는 값은 랜더링되지 않음. 존재조차 x-->
+    <div v-if="name === 'Alice'">Alice입니다</div>
+    <div v-else-if="name === 'Bella'">Bella입니다</div>
+    <div v-else-if="name === 'Cathy'">Cathy입니다</div>
+    <div v-else>아무도 아닙니다.</div>
+
+    <!-- v-if on <template> -->
+    <!-- template 페이지가 로드될 때 랜더링x. 로직적인 부분을 활용하기 위해 사용. 최종 출력에는 관여하지x -->
+    <template v-if=" name === 'Cathy'">
+      <div>Cathy입니다</div>
+      <div>나이는 30살입니다</div>
+    </template>
+
+    <!-- v-show -->
+    <!-- v-show는 보여질지 말지를 결정. 랜더링은 되어 있음 css display 속성만 전환(none/) -->
+    <div v-show="isShow">v-show</div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+         const isSeen = ref(true)
+         const name = ref("Cathy")
+         const isShow = ref(false)
+        return {
+          isSeen,
+          name,
+          isShow
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

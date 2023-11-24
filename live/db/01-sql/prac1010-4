@@ -1,0 +1,24 @@
+SELECT *
+FROM albums;
+
+SELECT *
+FROM artists;
+
+-- 한명의 아티스트가 몇개의 앨범을 냈는지
+-- 앨범수, 아티스트 id, 아티스트이름
+
+
+SELECT COUNT(*), ArtistId, Name
+FROM artists
+GROUP BY ArtistId;
+
+SELECT *
+FROM albums
+INNER JOIN artists
+ON albums.ArtistId = artists.ArtistId;
+
+SELECT COUNT(*) as AlbumCount, artists.ArtistId, artists.Name as ArtistName
+FROM albums
+INNER JOIN artists
+ON albums.ArtistId = artists.ArtistId
+GROUP BY artists.ArtistId;

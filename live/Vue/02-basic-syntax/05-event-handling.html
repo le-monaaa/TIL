@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Inline Handlers -->
+    <button v-on:click="count++">Add 1</button>
+    <p>Count: {{ count }}</p>
+
+    <!-- Method Handlers -->
+    <button @:click="myFunc">Hello</button>
+    <!-- v-on에서 발생한 event가 myFunc의 첫 번째 인자로 전달됨 -->
+
+    <!-- Calling Methods in Inline Handlers -->
+    <button @:click="greeting('Hello')">Say hello</button>
+    <button @:click="greeting('bye')">Say bye</button>
+
+    <!-- Accessing Event Argument in Inline Handlers -->
+    <!-- $를 붙이면 event 객체를 첫번째가 아닌 순서에 받을 수 있음 -->
+    <button @:click="warning('경고', $event)">Submit</button>
+
+    <!-- event modifiers -->
+    <form @submit.prevent="onSubmit">
+      <input type="submit">
+    </form>
+    <a @click:stop.prevent="onLink">Link</a>
+    <!-- 작성한 순서대로 실행되기 때문에 modifire 작성 시 주의 -->
+
+    <!-- key modifiers -->
+    <input type="text" @keyUp.enter="onSubmit">
+    <!-- keyboard event 에 대한건 mdn에서 봐야 함 -->
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+        const name= ref("Alice")
+        const myFunc = function (event){
+          console.log(event)
+          console.log(event.currentTarget)
+          console.log(`hello, ${name.value}`)
+        }
+        const greeting = function (message){
+          console.log(message)
+        }
+        const warning = function (message, event){
+          console.log(message)
+          console.log(event)
+        }
+        const onSubmit = function (event) {
+          console.log(event)
+        }
+        return {
+          count,
+          name,
+          myFunc,
+          greeting,
+          warning,
+          onSubmit
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

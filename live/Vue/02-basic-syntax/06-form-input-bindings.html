@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p> {{inputText1}} </p>
+    <input type="text" @input="onInput" :value ="inputText1">
+
+    <!-- 영어 외의 언어는 조금 동작이 어색하다. 한글은 위의 방법을 이용히는 수빆에 없음 -->
+    <p> {{inputText2}} </p>
+    <input type="text" v-model="inputText2">
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        // 사용자의 입력을 실시간으로 저장할 반응형 변수
+        const inputText1 = ref("")
+        const inputText2 = ref("")
+        const onInput = function (evnet){
+          inputText1.value = event.currentTarget.value
+        }
+        return {
+          inputText1,
+          onInput,
+          inputText2
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

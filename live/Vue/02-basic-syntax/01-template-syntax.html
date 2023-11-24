@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="app">
+    <!-- template syntax -->
+    <p> message : {{msg}} </p>
+    <!-- div의 자식 속성으로 들어가는 것을 확인할 수 있음 -->
+    <div v-html="rawHtml"></div>
+    <div v-bind:id="dynamicId"></div>
+    <div>{{number + 1}} </div>
+    <div>{{ ok ? "YES" : "NO" }} </div>
+    <div>{{msg.split("").reverse().join("")}} </div>
+    <div v-bind:id="`list-${id}`"></div>
+    
+
+    <!-- directive -->
+    <!-- seen 값이 null이 되면 랜더링도 안함. -->
+    <p v-if="seen">Hello</p>
+    <a v-bind:href="myUrl">Link</a>
+    <p><button v-on:click="doSomething">버튼</button></p>
+    <form v-on:submit.prevent="onSubmit">
+      <input type="submit">
+    </form>
+
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        const msg = ref('Hello')
+        // JS에서는 span tag, inline style 적용되어 있는 단순 문자열. 
+        const rawHtml = ref('<span style="color:red">This should be red.</span>')
+        // v-vind 바인딩 값이 null이나 undefined인 경우 렌더링 요소에서 제거됨
+        const dynamicId = ref('my-id')
+        const number = ref(1)
+        const ok = ref(false)
+        const seen = ref(true)
+        const id = ref(100)
+        const myUrl = 'https://www.google.co.kr/'
+        const doSomething = function () {
+          console.log('button clicked')
+        }
+        const onSubmit = function () {
+          console.log('form submitted')
+        }
+        return {
+          msg,
+          rawHtml,
+          dynamicId,
+          seen,
+          number,
+          ok,
+          id,
+          myUrl,
+          doSomething,
+          onSubmit
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

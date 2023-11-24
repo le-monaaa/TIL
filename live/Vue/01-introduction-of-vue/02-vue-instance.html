@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1> {{message}} </h1>
+    <!-- <h1> {{message.value}} </h1> JS에서는 .value로 나오지만 여기선 안나옴 왜??  -->
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // createApp : 하나의 Vue application instance를 만드는 Vue 내장 method. 
+    const { createApp, ref } = Vue
+    // app이라는 이름을 보통 씀.
+    // createApp은 인자로 객체를 받는다.(약속된 문법)
+    const app = createApp({
+      setup() {
+        // ref 객체로 래핑해줘야 반응형 객체가 됨
+        const message = ref("hello, vue!")
+        console.log(message)
+        // return으로 반환해줘야 template에서 사용할 수 있음
+        return {
+           message
+        }
+      }
+    })
+     
+    app.mount("#app")
+
+  </script>
+</body>
+
+</html>
