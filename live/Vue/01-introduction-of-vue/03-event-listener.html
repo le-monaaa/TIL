@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+  <div id="app">
+    <!-- v-on:여기서(click)이벤트가 발생한다면 =""에 해당하는 작업을 함 -->
+    <button v-on:click="increment"> {{count}} </button>
+  </div>
+<body>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const {createApp, ref} = Vue
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+        // count값을 증가시키는 함수
+        const increment = function () {
+          // count++
+          // ref 객체의 값을 증가시킬 수 없다(const 재할당 불가) 
+          // ref 객체 안의 값에 접근해서 갱신시킬 수는 있음(재할당이 아님)
+          count.value++
+        }
+        return{
+          count,
+          increment
+        }
+      }
+    })
+
+    app.mount("#app")
+
+  </script>
+</body>
+
+</html>

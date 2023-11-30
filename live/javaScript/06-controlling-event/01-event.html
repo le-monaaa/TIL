@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">버튼</button>
+
+  <script>
+    const btn = document.querySelector("#btn")
+
+    btn.addEventListener("click", function (event) {
+      console.log(event) 
+      // PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1, pressure: 0, …}
+      console.log(event.target)
+      // event handler를 부착한 요소.
+      console.log(event.currentTarget)
+      // evnet를 확인했을 때 null로 나오던 값이 정상적으로 콘솔창에 출력됨(버튼)
+      console.log(this)
+    })
+
+
+
+  </script>
+</body>
+
+</html>

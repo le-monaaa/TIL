@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- div 자체가 두 번 반복되는 것 확인 -->
+    <div v-for="(item, index) in myArr">
+      <!-- item이 객체이기때문에 안의 값은 chaining으로 추출 -->
+      {{ index }} // {{ item.name }}
+    </div>
+    <hr>
+    <!-- 순서가 있음. valye, key, index -->
+    <div v-for="(value, key, index) in myObj">
+      {{ value }} // {{ key }}, {{ index }}      
+    </div>
+
+    <!-- v-for on <template> -->
+    <hr>
+
+    <ul>
+      <!-- template tag는 랜더링되지 않음. 로직적인 부분을 담당하는 포장지. -->
+      <template v-for="item in myArr">
+        <li> {{item.name}} </li>
+        <li> {{item.age}} </li>
+        <hr>
+      </template>
+    </ul>
+
+    <!-- nested v-for -->
+    <!-- 중첩 for문 사용 가능. -->
+    <!-- 상위 요소에도 접근 가능. -->
+    <ul v-for="item in myInfo">
+      <!-- 정의되기 전에 사용 불가. -->
+      <p> {{friend}} </p>
+      <li v-for="friend in item.friends">
+        {{ item.name }}'s friend : {{ friend }}
+      </li>
+    </ul>
+    <!-- for문 안에서 사용 가능하지 상위 범위에서는 사용 불가. -->
+    <p> {{friend}} </p>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        // 배열 내 객체.
+        const myArr = ref([
+          { name: 'Alice', age: 20 },
+          { name: 'Bella', age: 21 }
+        ])
+        const myObj = ref({
+          name: 'Cathy',
+          age: 30
+        })
+
+        // nested v-for
+        const myInfo = ref([
+          { name: 'Alice', age: 20, friends: ['Bella', 'Cathy', 'Dan'] },
+          { name: 'Bella', age: 21, friends: ['Alice', 'Cathy'] }
+        ])
+
+        return {
+          myArr,
+          myObj,
+          myInfo
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

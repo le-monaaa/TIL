@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- Maintaining State with key -->
+    <!-- v-vind로 key를 각각의 item에 id를 붙여줌.  
+    vue의 내부적인 동작 중 문제가 생기지 않도록 
+    key는 각각의 요소를 식별할 수 있는 요소여야 함.
+    index는 안됨. index는 그 각각의 값에 대한 고유한 값이 x 
+    사용자가 중간 요소를 지웠을 때 인덱스는 바뀌어버림. -->
+    <div v-for="item in items" :key="item.id">
+      <!-- content -->
+      {{ item }}, {{item.id}}
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        let id = 0
+
+        const items = ref([
+          { id: id++, name: 'Alice' },
+          { id: id++, name: 'Bella' },
+        ])
+
+        return {
+          items,
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

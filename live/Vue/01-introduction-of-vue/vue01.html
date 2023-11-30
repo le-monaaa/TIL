@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1> {{message}} </h1>
+    <button @click="mo.count++"> count is : {{ mo.count }} </button>
+    <p> {{ mo.name }} </p>
+    <p> {{ mo.id }} </p>
+  </div>
+
+  <div id="app2">
+    <h1> {{message}} </h1>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    let a = 10
+    a = a + 60
+    // a를 객체로 감싸서 ~~
+    // ref로 묶으면 value로 감. 이거를 get, set으로 조작할 수 있음. 객체의 속성은 js가 추적 가능함
+    // 반응형 변수 사용하고싶으면 ref로 써라. 일반변수는 js가 추적하지 못하니까..
+    { a : 10 }
+
+    const app = createApp({
+      setup() {
+        const message = ref("hello, vue!")
+        // const count = ref(0)
+        const myobj = {
+            "id" : 1,
+            "name" : "kim",
+            "count" : 0
+        }
+        const mo = ref(myobj)
+        return {
+           message,
+           mo
+        }
+      }
+    })
+    
+    const app2 = createApp({
+        setup() {
+            const message = ref("this is app2")
+        return {
+        message
+        }
+        }
+    })
+
+    app.mount("#app")
+    app2.mount("#app2")
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- [Bad] v-for with v-if -->
+    <!-- is complted가 true인 것만 출력 -->
+    <ul >
+      <!-- TypeError: Cannot read properties of undefined (reading 'isComplete') -->
+      <!-- v-if가 v-for보다 우선순위가 높음. v-if가 실행될 때 todo는 정의되지 않았음. -->
+
+      <!-- <li v-for="todo in todos" v-if="!todo.isComplete" :key="todo.id"> -->
+        <!-- {{todo.name}} -->
+      </li>
+    </ul>
+
+    <!-- [Good] v-for with v-if & computed-->
+    <!-- 해결 1: computed 활용 //조건에 맞는 배열을 먼저 계산해두기 -->
+    <ul>
+      <li v-for="todo in completeTodos" :key="todo.id">
+        {{todo.name}}
+      </li>
+    </ul>
+
+    <!-- [Good] v-for with v-if & template-->
+    <!-- 해결 2: v-for과 v-if를 분할해서 template와 함께 활용 -->
+    <ul>
+      <template v-for="todo in todos" :key="todo.id">
+        <li v-if="!todo.isComplete">
+          {{todo.name}}
+        </li>
+      </template>
+    </ul>
+
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    const app = createApp({
+      setup() {
+        let id = 0
+
+        const todos = ref([
+          { id: id++, name: '복습', isComplete: true },
+          { id: id++, name: '예습', isComplete: false },
+          { id: id++, name: '저녁식사', isComplete: true },
+          { id: id++, name: '노래방', isComplete: false }
+        ])
+
+        const completeTodos = computed(() =>{
+          // filter- 필터의 콜백함수의 return이 true인 것만 새로운 배열로 반환
+          // map은 모든 요소에 대해 적용하여 새로운 배열을 만들어 반환
+          return todos.value.filter((todo) => !todo.isComplete)
+        })
+
+        return {
+          todos,
+          completeTodos
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{greeting}} </h1>
+    <button @click="count++">{{count}} </button>
+    <p>{{count}} </p>
+    <h3>{{count}} </h3>
+    <!-- vanilla js로는 하나하나 바꿔줘야 할 것을 Vue로 하나의 선언을 통해 실시간으로 모든 값을 갱신할 수 있다 -->
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // JS 객체 - "구조 분해 할당"
+    const { createApp, ref } = Vue
+    // vue의 application instance 생성하는 함수
+    const app = createApp({
+      // 인자로 객체가 하나 들어가고 인자의 method(setup이라는 이름의 함수)가 들어감.
+      // "단축 메서드"로 표현
+      setup() {
+        // ref 함수-> 구조분해할당으로 가져와진 vue 객체에 내장된 함수
+        const count = ref(0)
+
+        const greeting = ref("hello")
+
+        // 객체 하나를 리턴함(key:value 형식)
+        // setup method에서 return객체에 반환값으로 존재해야 template에서 사용할 수 있음
+        return {
+          // "단축 속성" key 이름과 value로 쓰이는 변수의 이름이 같으면 그냥 쓰면 됨.
+          count,
+          greeting
+        }
+      }
+    })
+    // 이 앱을 탑재하는 것을 mount 로 함,
+    app.mount("#app")
+
+  </script>
+</body>
+
+</html>

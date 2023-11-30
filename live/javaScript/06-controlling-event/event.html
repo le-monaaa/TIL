@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            margin : 5px auto;
+            padding : 5px;
+            width : 400px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>ONE</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Quisquam nam, pariatur eaque accusamus porro incidunt earum atque rem 
+                doloremque dolorum illo, alias repudiandae nemo. Ut eaque harum dolores iure commodi.</p>
+                <hr>
+                <button class="remove-btn">X</button>
+            </div>
+        <div class="card">
+            <h1>TWO</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Quisquam nam, pariatur eaque accusamus porro incidunt earum atque rem 
+                doloremque dolorum illo, alias repudiandae nemo. Ut eaque harum dolores iure commodi.</p>
+                <hr>
+                <button class="remove-btn">X</button>
+            </div>
+        <div class="card">
+            <h1>THREE</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Quisquam nam, pariatur eaque accusamus porro incidunt earum atque rem 
+                doloremque dolorum illo, alias repudiandae nemo. Ut eaque harum dolores iure commodi.</p>
+                <hr>
+                <button class="remove-btn">X</button>
+            </div>
+    </div>
+
+    <script>
+        // 1. 모든 버튼에 이벤트 부착
+        const buttons = document.querySelectorAll(".remove-btn")
+
+        console.log(buttons)
+        const remove = function (event) {
+        const container = document.querySelector(".container")
+        // event.target.parentElement --> 이경우 button의 부모요소
+        // console.log(event.target.parentElement)
+        container.removeChild(event.target.parentElement)
+        // event와 target의 관계가 간단할때는 위의 방법 이용, 하지만 어려울경우 queryselector 이용
+            
+        }
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", remove)
+        })
+    </script>
+</body>
+</html>
