@@ -1,30 +1,47 @@
+// 인터페이스 인덱스
+// 인덱스 시그니처
 
+// 배열
 
-const el = document.querySelector("body")
-el.textContent = "Hello, World"
-// 에러 : el은 null 일 수 있다
-// body 가 html에 존재하는지 ts는 알 수가 없다.
-// 확실히 이게 있다고 단언할 수 있을 때 사용
-
-const el1 = document.querySelector("body") as HTMLBodyElement
-// queryselector로 찾은 "body"는 반드시 null이 아니고,
-// html의 bodyelement가 될 것이다. 라고 단언
-
-function getNumber(x:number | null | undefined) {
-    return Number(x.toFixed(2))
+interface Fruits {
+    [item: number] : string
 }
-getNumber(3.1231412)
-getNumber(null)
 
+const fruits: Fruits = ["apple", "kiwi", "peach"]
+console.log(fruits[1])
+// 인덱싱 가능
 
-function getNumber2(x:number | null | undefined) {
-    return Number((x as number).toFixed(2))
+// 객체
+interface User {
+    // [key: string] : unknown
+    // unknown: 모든 값 허용
+    name: string
+    age: number
 }
-// x에는 null 이 들어오지 않을 것이고 number일 것이다.
-getNumber2(3.1231412)
-getNumber2(null)
+
+const kim: User = {
+    name: "kim",
+    age: 22
+}
+
+kim["isValid"] = true
+
+// 확장, 상속 가능 ( extends )
+// 속성 중복시 타입 맞춰주기.
+// 같은 이름 다른 속성으로 여러 개 생성 가능
+
+interface FullName {
+    firstName: string
+    lastName: string
+}
+interface FullName {
+    middleName: string
+    lastName: string
+}
+const fullName: FullName = {
+
+}
 
 
-//
 
-function getValue(x: string | number, isNumber: boo)
+
