@@ -16,12 +16,6 @@
     "background": {
       "service_worker": "scripts/background.js"
     },
-    "permissions": [
-      "unlimitedStorage",
-      "storage",
-      "declarativeNetRequest",
-      "declarativeNetRequestWithHostAccess"
-    ],
     "host_permissions": [
       "https://www.acmicpc.net/",
       "https://solved.ac/api/v3/*"
@@ -32,27 +26,29 @@
           "<all_urls>"
         ],
         "resources": [
-          "library/jquery-3.3.1.min.js",
-          "library/semantic.min.js",
           "popup.html",
           "popup.js",
-          "get_data.js"
+          "solved.js"
         ]
       }
     ],
     "content_scripts" : [
       {
         "matches" : [
-          "https://www.acmicpc.net/*"
+          "https://www.acmicpc.net/status?*from_mine*"
         ],
         "js" : [
-          "library/sha1.min.js",
-          "library/jszip.min.js",
-          "library/FileSaver.min.js",
-          "scripts/get_data.js"
+          "scripts/baekjoon/solved.js"
           
+        ]
+      },
+      {
+        "matches" : [
+          "https://www.acmicpc.net/problem/*"
         ],
-        "run_at" : "document_idle"
+        "js" : [
+          "scripts/baekjoon/problem.js"
+        ]
       }
     ]
   }
