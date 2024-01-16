@@ -1,0 +1,59 @@
+{
+    "manifest_version": 3,
+    "name": "extension-test",
+    "description": "백준 따라하기",
+    "version": "1.1.22",
+    "author": "flaxinger",
+    "action": {
+      "default_icon": "images/icon-16.png",
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "images/icon-16.png",
+      "48": "images/icon-16.png",
+      "128": "images/icon-16.png"
+    },
+    "background": {
+      "service_worker": "scripts/background.js"
+    },
+    "permissions": [
+      "unlimitedStorage",
+      "storage",
+      "declarativeNetRequest",
+      "declarativeNetRequestWithHostAccess"
+    ],
+    "host_permissions": [
+      "https://www.acmicpc.net/",
+      "https://solved.ac/api/v3/*"
+    ],
+    "web_accessible_resources": [
+      {
+        "matches": [
+          "<all_urls>"
+        ],
+        "resources": [
+          "library/jquery-3.3.1.min.js",
+          "library/semantic.min.js",
+          "popup.html",
+          "popup.js",
+          "get_data.js"
+        ]
+      }
+    ],
+    "content_scripts" : [
+      {
+        "matches" : [
+          "https://www.acmicpc.net/*"
+        ],
+        "js" : [
+          "library/sha1.min.js",
+          "library/jszip.min.js",
+          "library/FileSaver.min.js",
+          "scripts/get_data.js"
+          
+        ],
+        "run_at" : "document_idle"
+      }
+    ]
+  }
+  
