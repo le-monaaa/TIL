@@ -1,47 +1,34 @@
-// 인터페이스 인덱스
-// 인덱스 시그니처
+// 제네릭(Generic)
+// 클래스
 
-// 배열
-
-interface Fruits {
-    [item: number] : string
+class User<P> {
+  // P라는 타입을 받아서 payload의 타입으로 명시함.--<P>없었을 때는 임의로 any타입이 됨
+  // 여기서 payload는 매개변수이자 내부속성이기 때문에 this 키워드로도 바로 접근 가능하다.
+  constructor(public payload) {}
+  getPayload() {
+    return this.payload;
+  }
 }
 
-const fruits: Fruits = ["apple", "kiwi", "peach"]
-console.log(fruits[1])
-// 인덱싱 가능
-
-// 객체
-interface User {
-    // [key: string] : unknown
-    // unknown: 모든 값 허용
-    name: string
-    age: number
+interface UserType {
+  name: string;
+  age: number;
+  isValid: boolean;
+}
+interface userBType {
+  name: string;
+  age: number;
+  emails: string[];
 }
 
-const kim: User = {
-    name: "kim",
-    age: 22
-}
-
-kim["isValid"] = true
-
-// 확장, 상속 가능 ( extends )
-// 속성 중복시 타입 맞춰주기.
-// 같은 이름 다른 속성으로 여러 개 생성 가능
-
-interface FullName {
-    firstName: string
-    lastName: string
-}
-interface FullName {
-    middleName: string
-    lastName: string
-}
-const fullName: FullName = {
-
-}
-
-
-
-
+const kim = new User({
+  name: "kim",
+  age: 23,
+  isValid: true,
+  emails: [], //
+});
+const ra = new User({
+  name: "ra",
+  //
+  emails: ["emailadd@mail.com"],
+});

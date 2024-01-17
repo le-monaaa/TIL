@@ -49,6 +49,22 @@
         "js" : [
           "scripts/baekjoon/problem.js"
         ]
+      },
+      {
+        "matches" : [
+          "https://www.acmicpc.net/source/*"
+        ],
+        "js" : [
+          "scripts/baekjoon/submit.js"
+        ] 
+      },
+      {
+        "matches" : [
+          "https://swexpertacademy.com/main/solvingProblem/solvingProblem.do"
+        ],
+        "js": [
+          "scripts/swea/problem.js"
+        ]
       }
     ]
   }

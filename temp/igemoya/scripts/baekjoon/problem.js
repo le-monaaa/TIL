@@ -46,7 +46,7 @@ let arr = document.querySelectorAll("#problem_tags > div.spoiler > ul > li > a "
 if(arr.length==0){
     arr = document.querySelectorAll("#problem_tags > ul > li > a")
 }
-console.log(arr)
+// console.log(arr)
 arr.forEach(ele => {
     categories.push(ele.innerHTML)
 });
@@ -63,4 +63,5 @@ const problemData = {
 }
 
 console.log(problemData)
+window.localStorage.setItem("flag", 0)
 window.localStorage.setItem("problemData", JSON.stringify(problemData))
