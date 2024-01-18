@@ -63,5 +63,4 @@ const problemData = {
 }
 
 console.log(problemData)
-window.localStorage.setItem("flag", 0)
 window.localStorage.setItem("problemData", JSON.stringify(problemData))

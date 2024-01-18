@@ -1,13 +1,21 @@
-const codes = document.querySelectorAll(
-  "body > div.wrapper > div.container.content > div.row > div:nth-child(2) > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code > div > pre > span"
-);
+function getSourceCode() {
+  
+  const codes = document.querySelectorAll(
+    "#submit_form > div:nth-child(5) > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code > div > pre > span"
+    );
+  if(codes){
+      const sourceCode = [];
+      codes.forEach((ele) => {
+      sourceCode.push(ele.textContent);
+      });
+    
+      window.localStorage.setItem("sourceCode", sourceCode)
+      console.log(sourceCode)
+    }
+    else{
+      console.log("empty")
+    }
+    
+}
 
-const sourceCode = [];
-codes.forEach((ele) => {
-  sourceCode.push(ele.textContent);
-});
-
-// console.log(sourceCode)
-window.localStorage.setItem("sourceCode", JSON.stringify(sourceCode));
-window.localStorage.setItem("flag", 1);
-// window.close();
+setInterval(getSourceCode, 1000);

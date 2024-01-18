@@ -1,41 +1,34 @@
 const tr = document.querySelector("#status-table > tbody > tr");
 
-function getSourceCode() {
-  const url = document
-    .querySelector(
-      `#solution-${tr.children[0].textContent} > td:nth-child(7) > a:nth-child(1)`
-    )
-    .getAttribute("href");
-  console.log(url);
-  window.open("https://www.acmicpc.net" + url);
-}
-
 function isStatusWaiting() {
-  const resultProcess = document.querySelector(
+  let resultProcess = document.querySelector(
     "#status-table > tbody > tr :nth-child(4) > span"
-  ).textContent;
+    ).textContent;
+    console.log(resultProcess)
   return (
-    resultProcess === "기다리는 중" ||
-    resultProcess === "채점 준비 중" ||
-    resultProcess.substring(0, 4) === "채점 중"
-  );
-}
-if (tr) {
-  async function waitForStatusChange() {
-    if (window.localStorage.getItem("flag") === 0) {
-      getSourceCode();
+      resultProcess === "기다리는 중" ||
+      resultProcess === "채점 준비 중" ||
+      resultProcess.substring(0, 4) === "채점 중"
+      );
     }
-    while (isStatusWaiting()) {
-      // 1초마다 다시 체크
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-  }
-  // 변경되면,
-  waitForStatusChange().then(() => {
-    if (
-      document.querySelector("#status-table > tbody > tr :nth-child(4) > span")
-        .textContent != "틀렸습니다"
-    ) {
+    if(isStatusWaiting){
+      // 초기 상태가 채점 중일 때만 실행.
+      console.log("solved entered, ", resultProcess)
+      async function waitForStatusChange() {
+        while (isStatusWaiting()) {
+          // 1초마다 다시 체크
+          let result = document.querySelector(
+            "#status-table > tbody > tr :nth-child(4) > span"
+            ).textContent;
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      }
+      // 변경되면,
+      waitForStatusChange().then(() => {
+        if (
+          result === "맞았습니다!!"
+          ) {
+      console.log("맞았습니다", result)
       const col = tr.children;
       const jsonproblem = window.localStorage.getItem("problemData");
       const problem = JSON.parse(jsonproblem);
@@ -54,8 +47,14 @@ if (tr) {
       // problem: 문제 정보.
       // sourceCode: 소스코드.
       // result : 유저의 제출결과.
-      console.log(JSON.parse(data.sourceCode));
+      console.log(data.sourceCode);
       console.log(data);
     }
+    else if(
+      result === "틀렸습니다"
+    ){
+      console.log(result)
+    }
   });
+
 }

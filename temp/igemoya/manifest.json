@@ -52,19 +52,11 @@
       },
       {
         "matches" : [
-          "https://www.acmicpc.net/source/*"
+          "https://www.acmicpc.net/submit/*"
         ],
         "js" : [
           "scripts/baekjoon/submit.js"
         ] 
-      },
-      {
-        "matches" : [
-          "https://swexpertacademy.com/main/solvingProblem/solvingProblem.do"
-        ],
-        "js": [
-          "scripts/swea/problem.js"
-        ]
       }
     ]
   }
